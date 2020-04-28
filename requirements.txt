@@ -1,0 +1,2 @@
+nose
+opencv-python
