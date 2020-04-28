@@ -1,8 +1,7 @@
 # Driver Drowsiness Detection System
 
 ## Description
-
-### TODO
+TODO
 
 ## Setup
 Initiate the project by running the command
