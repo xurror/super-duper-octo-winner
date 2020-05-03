@@ -1,13 +1,24 @@
 # Driver Drowsiness Detection System
 
 ## Description
-
-### TODO
+TODO
 
 ## Setup
-Initiate the project by running the command
-`make`
-You can run the project by running the command
-`make start`
-Run tests by running:
-`make test`
+### Requirements:
+python >= 3
+
+How to Run
+===
+
+1. python -m venv venv
+1. source venv/bin/activate
+1. pip install -r requirements.txt
+
+start the app with:
+`python src/main.py`
+
+Run tests with:
+`nosetests test`
+
+Once done, you can shutdown your virtual environment by:
+`deactivate`
