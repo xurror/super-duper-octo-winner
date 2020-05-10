@@ -1,16 +1,18 @@
 import os
 import cv2
 import time
+import platform
 
 from datetime import datetime
-from src.classifier import Classifier
-from pygame import mixer
+from modules.classifier import Classifier
 
-def alarm():
-    mixer.init()
-    sound = mixer.sound('src/alarm.wav')
-    sound.play()
-
+def playsound(file='src/data/alarm.wav'):
+    if platform.system().lower() == 'linux':
+        os.system("aplay " + file)
+    elif 'mac' in platform.system().lower():
+        os.system("afplay " + file)
+    elif platform.system().lower() == 'windows':
+        os.system("fmedia " + file + " --background")
 
 if __name__ == '__main__':
     print("\tWelcome to Super Duper Octo Winner")
@@ -47,7 +49,7 @@ if __name__ == '__main__':
         if score > 15: # Using 15 as threshold to say the driver has had his/her eyes closed for too long
             # Driver is feeling sleepy so we play the alarm
             cv2.imwrite(os.path.join(path, str(datetime.now)+'.jpg'), frame)
-            alarm() # Play sound
+            playsound() # Play sound
 
             if thicc < 16:
                 thicc += 2

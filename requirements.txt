@@ -1,5 +1,4 @@
 nose
 tensorflow
 opencv-python
-pygame
 matplotlib
