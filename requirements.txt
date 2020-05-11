@@ -1,4 +1,6 @@
 nose
-tensorflow
+torch
+pillow
+torchvision
 opencv-python
 matplotlib
