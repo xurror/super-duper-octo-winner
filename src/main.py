@@ -14,9 +14,7 @@ def playsound(file='src/data/alarm.wav'):
     elif platform.system().lower() == 'windows':
         os.system("fmedia " + file + " --background")
 
-if __name__ == '__main__':
-    print("\tWelcome to Super Duper Octo Winner")
-
+def main():
     thicc = 2
     score = 0 # To evaluate the state of the driver(drowsy or not)
     path = os.getcwd()
@@ -33,7 +31,7 @@ if __name__ == '__main__':
         left_eye_pred = classifier.left_eye()
         right_eye_pred = classifier.right_eye()
 
-        if left_eye_pred[0] == 0 and right_eye_pred[0] == 0:
+        if left_eye_pred == 0 and right_eye_pred == 0:
             score += 1
             cv2.putText(frame, "Closed", (10, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
         
@@ -65,3 +63,7 @@ if __name__ == '__main__':
             break
     cap.release()
     cv2.destroyAllWindows()
+
+if __name__ == '__main__':
+    print("\tWelcome to Super Duper Octo Winner")
+    main()
