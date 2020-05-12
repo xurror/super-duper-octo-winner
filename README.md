@@ -5,7 +5,13 @@ TODO
 
 ## Setup
 ### Requirements:
-python <= 3.6
+python >= 3.5
+
+#### Creating a virtual Environment:
+
+- To create the virtual environment: `python -m venv venv`
+- To activate venv `source venv/bin/activate`
+- To run the main file file with video capture: `python src/main.py`
 
 How to Run
 ===
