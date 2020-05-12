@@ -4,7 +4,7 @@ import time
 import platform
 
 from datetime import datetime
-from modules.classifier import Classifier
+from classifier import Classifier
 
 def playsound(file='src/data/alarm.wav'):
     if platform.system().lower() == 'linux':
