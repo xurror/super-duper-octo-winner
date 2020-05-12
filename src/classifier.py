@@ -6,6 +6,10 @@ import torchvision.transforms as transforms
 from model import Net
 from PIL import Image
 
+def extract_eye():
+    # TODO: Manually perform feature extraction(optional)
+    pass
+
 class Classifier(object):
     def __init__(self, img):
         self.model = Net()

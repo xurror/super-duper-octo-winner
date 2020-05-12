@@ -7,6 +7,7 @@ from datetime import datetime
 from classifier import Classifier
 
 def playsound(file='src/data/alarm.wav'):
+    # TODO; Libraries like playsound( Use a better sound method)
     if platform.system().lower() == 'linux':
         os.system("aplay " + file)
     elif 'mac' in platform.system().lower():
@@ -14,8 +15,11 @@ def playsound(file='src/data/alarm.wav'):
     elif platform.system().lower() == 'windows':
         os.system("fmedia " + file + " --background")
 
+# TODO: Set a thicker frame around the face with a bighter color
+
 def main():
     thicc = 2
+    # TODO: set sleep threshold to 8
     score = 0 # To evaluate the state of the driver(drowsy or not)
     path = os.getcwd()
     font = cv2.FONT_HERSHEY_COMPLEX_SMALL
@@ -33,6 +37,7 @@ def main():
 
         if left_eye_pred == 0 and right_eye_pred == 0:
             score += 1
+            # TODO: Change Closed = Asleep and Opened = Awake
             cv2.putText(frame, "Closed", (10, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
         
         else:
@@ -43,10 +48,10 @@ def main():
             score = 0
         
         cv2.putText(frame, "Score: "+str(score), (100, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
-
+        
         if score > 15: # Using 15 as threshold to say the driver has had his/her eyes closed for too long
             # Driver is feeling sleepy so we play the alarm
-            cv2.imwrite(os.path.join(path, str(datetime.now)+'.jpg'), frame)
+            cv2.imwrite(os.path.join(path, str(datetime.now)+'.jpg'), frame) # TODO: Fix code crash after sound play
             playsound() # Play sound
 
             if thicc < 16:
