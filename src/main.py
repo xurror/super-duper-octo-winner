@@ -37,12 +37,11 @@ def main():
 
         if left_eye_pred == 0 and right_eye_pred == 0:
             score += 1
-            # TODO: Change Closed = Asleep and Opened = Awake
-            cv2.putText(frame, "Closed", (10, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
+            cv2.putText(frame, "Asleep", (10, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
         
         else:
             score = -1
-            cv2.putText(frame, "Opened", (10, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
+            cv2.putText(frame, "Awake", (10, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
 
         if score < 0:
             score = 0
