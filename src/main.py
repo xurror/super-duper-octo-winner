@@ -48,9 +48,9 @@ def main():
         
         cv2.putText(frame, "Score: "+str(score), (100, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
         
-        if score > 15: # Using 15 as threshold to say the driver has had his/her eyes closed for too long
+        if score >= 8: # Using 15 as threshold to say the driver has had his/her eyes closed for too long
             # Driver is feeling sleepy so we play the alarm
-            cv2.imwrite(os.path.join(path, str(datetime.now)+'.jpg'), frame) # TODO: Fix code crash after sound play
+            #cv2.imwrite(os.path.join(path, str(datetime.now)+'.jpg'), frame) # TODO: Fix code crash after sound play
             playsound() # Play sound
 
             if thicc < 16:
