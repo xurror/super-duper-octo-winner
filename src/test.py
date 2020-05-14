@@ -21,18 +21,18 @@ def test_with_image(img_path):
 
     if left_eye_pred == 0 and right_eye_pred == 0:
         score += 1
-        cv2.putText(img, "Closed", (10, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
+        cv2.putText(img, "Asleep", (10, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
 
     else:
         score = -1
-        cv2.putText(img, "Opened", (10, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
+        cv2.putText(img, "Awake", (10, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
 
     if score < 0:
         score = 0
 
     cv2.putText(img, "Score: "+str(score), (100, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
 
-    if score > 15: # Using 15 as threshold to say the driver has had his/her eyes closed for too long
+    if score > 8: # Using 15 as threshold to say the driver has had his/her eyes closed for too long
         # Driver is feeling sleepy so we play the alarm
         cv2.imwrite(os.path.join(path, str(datetime.now)+'.jpg'), img)
         #playsound() # Play sound
@@ -46,10 +46,9 @@ def test_with_image(img_path):
         cv2.readOpticalFlow(img, (0, 0), (width, height), (0, 0, 255), thicc)
 
     cv2.imshow('frame', img)
-
-    cv2.waitKey(0)
-
-    cv2.destroyAllWindows()
+    k = cv2.waitKey(0)
+    if k == 27:
+    	cv2.destroyAllWindows()
 
 img_path = input("Enter image path: ")
 test_with_image(img_path)
