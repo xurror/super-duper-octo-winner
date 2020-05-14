@@ -25,6 +25,7 @@ class Classifier(object):
         face_cascade = cv2.CascadeClassifier('src/haarcascades/haarcascade_frontalface_default.xml')
         left_eye_cascade = cv2.CascadeClassifier('src/haarcascades/haarcascade_lefteye_2splits.xml')
         right_eye_cascade = cv2.CascadeClassifier('src/haarcascades/haarcascade_righteye_2splits.xml')
+        eye_cascade = cv2.CascadeClassifier('src/haarcascades/haarcascade_eye.xml')
 
         height, width = self.img.shape[:2] 
 
@@ -37,12 +38,16 @@ class Classifier(object):
         cv2.rectangle(self.img, (0, height-50) , (200, height) , (0,0,0) , thickness=cv2.FILLED )
         
         for (x,y,w,h) in faces:
-            cv2.rectangle(self.img, (x, y) , (x+w, y+h) , (100, 100, 100), 1)
+            cv2.rectangle(self.img, (x, y) , (x+w, y+h) , (255, 0, 0), 2)
+            roi_gray = gray[y:y+h, x:x+w]
+            roi_color = img[y:y+h, x:x+w]
+            eyes = eye_cascade.detectMultiScale(roi_gray)
+            for (x,y,w,h) in eyes:
+                cv2.rectangle(roi_color, (x, y), (x+w, y+h),(0,255,0), 2)
 
     def right_eye(self):
         for x, y, w, h in self.right_eye_gray:
             right_eye_img = self.img[y:y+h, x:x+w]
-            
             right_eye_img = Image.fromarray(right_eye_img)
 
             right_eye_img = self.transform(right_eye_img)
@@ -57,7 +62,6 @@ class Classifier(object):
     def left_eye(self):
         for x, y, w, h in self.left_eye_gray:
             left_eye_img = self.img[y:y+h, x:x+w]
-
             left_eye_img = Image.fromarray(left_eye_img)
 
             left_eye_img = self.transform(left_eye_img)
