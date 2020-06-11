@@ -2,10 +2,16 @@ import os
 import cv2
 from datetime import datetime
 from classifier import Classifier
+from models.VGG_Face import Vgg_face_dag
+from models.VGG_Face import vgg_face_dag
 
 def test_with_image(img_path):
+    VGG_Face = Vgg_face_dag()
+    VGG_Face = vgg_face_dag(VGG_Face, "src/models/vgg_face_dag.pth")
     thicc = 2
     score = 0 # To evaluate the state of the driver(drowsy or not)
+    frame_count = 0
+    frames = []
     path = os.getcwd()
     font = cv2.FONT_HERSHEY_COMPLEX_SMALL
 
@@ -19,6 +25,14 @@ def test_with_image(img_path):
 
     right_eye_pred = classifier.right_eye()
 
+    frames.append(img)
+    drunk_pred = classifier.drunk_pred(frames, VGG_Face)
+
+    if drunk_pred == 1:
+        cv2.putText(img, "Drunk", (10, 20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
+    else:
+        cv2.putText(img, "Sober", (10, 20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
+        
     if left_eye_pred == 0 and right_eye_pred == 0:
         score += 1
         cv2.putText(img, "Asleep", (10, height-20), font, 1, (255, 255, 255), 1, cv2.LINE_AA)

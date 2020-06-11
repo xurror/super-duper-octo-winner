@@ -34,10 +34,6 @@ def spilt_features(df=None, file_index=None, features_dir="vgg_face7/", data_dir
 
     count = 0
 
-    #file_index = "DRUNK REACTION - Doctor Who Christmas Special - The Return Of Doctor Mysterio - YouTube.MP4_10_102.mp4_aligned_1.mp4"
-    #data_dir = "src/data/drunk/" + data_dir
-    #features_dir = "src/data/vgg_face7/" + features_dir
-
     for i in range(df.shape[0]):
         set_split = df["train"][i]
         category = df["Drunk"][i].lower()
@@ -102,7 +98,7 @@ def split_data():
     spilt_features(df, file_index, "src/data/vgg_face7/", "src/data/drunk/")
 
 if __name__ == "__main__":    
-    #split_data()
+    split_data()
     path, dirs, train_files = next(os.walk("src/data/drunk/train"))
     path, dirs, test_files = next(os.walk("src/data/drunk/test"))
     path, dirs, val_files = next(os.walk("src/data/drunk/val"))
